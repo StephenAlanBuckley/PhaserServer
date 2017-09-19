@@ -1,10 +1,10 @@
-#Simple Node Server!
+# Simple Node Server!
 
 Here's a simple node server I made so that when ya wanna start a new server for a little project it's nice and easy.
 
-#Gotchas
+# Gotchas
 
-#Resources:
+# Resources:
 Here's the tutorial series this whole thing is based on:
 https://blog.risingstack.com/node-hero-tutorial-getting-started-with-node-js/
 
