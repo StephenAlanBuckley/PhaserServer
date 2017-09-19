@@ -1,0 +1,24 @@
+{
+  "name": "simple_node_server",
+  "version": "1.0.0",
+  "description": "Just a simple get-started server so I don't type all the same boilerplate every time",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.18.1",
+    "express": "^4.15.4",
+    "express-handlebars": "^3.0.0",
+    "pg": "^7.3.0"
+  },
+  "devDependencies": {
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Stephen Buckley",
+  "license": "ISC"
+}
