@@ -1,13 +1,14 @@
 {
-  "name": "simple_node_server",
+  "name": "phaser_server",
   "version": "1.0.0",
-  "description": "Just a simple get-started server so I don't type all the same boilerplate every time",
+  "description": "A Simple Game Server",
   "main": "index.js",
   "dependencies": {
     "body-parser": "^1.18.1",
     "express": "^4.15.4",
     "express-handlebars": "^3.0.0",
     "pg": "^7.3.0",
+    "phaser": "^2.6.2",
     "request": "^2.81.0",
     "request-promise": "^4.2.1"
   },

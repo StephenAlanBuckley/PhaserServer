@@ -19,7 +19,8 @@ const app = express()
 app.engine('.hbs', exphbs({
   defaultLayout: 'main',
   extname: '.hbs',
-  layoutsDir: path.join(__dirname, 'views/layouts')
+  layoutsDir: path.join(__dirname, 'views/layouts'),
+  partialsDir: path.join(__dirname, 'views/partials')
 }))
 app.set('view engine', '.hbs')
 app.set('views', path.join(__dirname, 'views'))
@@ -27,12 +28,44 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
+app.use(express.static('static'))
 
 
 //Homepage
 app.get('/', (request, response) => {
-  response.render('home', {
-    name: 'HELLO'
+  response.render('screen', {
+    scripts: [
+      "/js/phaser.js",
+      "/js/player.js",
+      "/js/enemyManager.js",
+      "/js/enemyTank.js",
+      "/js/obstacleManager.js",
+      "/js/game.js"
+    ]
+  })
+})
+
+
+//every server should serve this beautiful quine
+app.get('/world', (request, response) => {
+  response.render('screen', {
+    name: 'HELLO',
+    scripts: [
+      "/js/quineworld.js",
+    ]
+  })
+})
+
+//example tanks page
+app.get('/tanks', (request, response) => {
+  response.render('screen', {
+    scripts: [
+      "/js/phaser.js",
+      "/js/player.js",
+      "/js/enemyManager.js",
+      "/js/enemyTank.js",
+      "/js/game.js"
+    ]
   })
 })
 
