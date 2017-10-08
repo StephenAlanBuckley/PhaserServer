@@ -16,8 +16,8 @@ class ObstacleManager {
     let wall = this.obstacles.create(x, y, 'wall', null, true, this.obstacleIndex)
     game.physics.enable(wall, Phaser.Physics.ARCADE)
     wall.body.immovable = true
-    wall.width = 100
-    wall.height = 100
+    wall.width = Math.floor(Math.random() * 100) + 50
+    wall.height = Math.floor(Math.random() * 100) + 50
     wall.anchor.setTo(0.5, 0.5);
 
     this.obstaclesArray.push(wall)

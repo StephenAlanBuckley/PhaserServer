@@ -3,9 +3,19 @@
  * It probably makes more sense to store them as a series of base64 blobs
  * There's no mutations yet
  */
+
 const BASE_DNA_LENGTH = 100
 const MIN_CROSSOVER_RATE = 15
 const MAX_CROSSOVER_RATE = 35
+
+/* UNUSED
+const MUTATIONS = {
+  this.INSERTION_PERCENTAGE = .1
+  this.DELETION_PERCENTAGE = .1
+  this.SUBSITUTION_PERCENTAGE = .2
+}
+*/
+
 
 class Chromosome {
   constructor(fromScratch = false) {
@@ -60,7 +70,7 @@ class Chromosome {
     }
 
     let newChromosome = ""
-    let readingFromParent = 0;
+    let readingFromParent = Math.floor(Math.random() * 10) % 2
     for (var i = 1; i< crossovers.length; i++) {
       newChromosome += parents[readingFromParent].slice(crossovers[i-1], crossovers[i])
       readingFromParent = (readingFromParent + 1) % 2
@@ -68,15 +78,46 @@ class Chromosome {
 
     //let's get the tail of whichever parent we ended on. No sweat if this is an empty string being added at the tail
     newChromosome += parents[readingFromParent].slice(crossovers[crossovers.length -1])
+
     return newChromosome
   }
 }
 
+/*
 let dad = new Chromosome(true)
 let mom = new Chromosome(true)
 let child = new Chromosome(false)
 child.dna = dad.mate(mom)
 
-console.log(dad.dna);
-console.log(mom.dna);
-console.log(child.dna);
+printDadColor(dad.dna)
+printMomColor(mom.dna)
+
+let colorChildString = ''
+for (var i = 0; i< child.dna.length; i++) {
+  if (child.dna.charAt(i) == mom.dna.charAt(i)) {
+    if (child.dna.charAt(i) == dad.dna.charAt(i)) {
+      colorChildString += '\x1b[37m' + child.dna.charAt(i) + '\x1b[0m'
+    } else {
+      colorChildString += '\x1b[34m' + child.dna.charAt(i) + '\x1b[0m'
+    }
+  } else {
+    colorChildString += '\x1b[31m' + child.dna.charAt(i) + '\x1b[0m'
+  }
+}
+
+console.log(colorChildString)
+
+
+
+function printDadColor(character) {
+  console.log('\x1b[31m%s\x1b[0m', character)
+}
+
+function printMomColor(character) {
+  console.log('\x1b[34m%s\x1b[0m', character)
+}
+
+function printBothColor(character) {
+  console.log('\x1b[37m%s\x1b[0m', character)
+}
+*/
