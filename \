@@ -1,0 +1,15 @@
+class Sense {
+  constructor(creature, width, height, game) {
+    this.game = game
+
+  }
+
+  createSense(width, height) {
+    this.sprite = game.add.sprite(0, 0, my_canvas)
+    this.sprite.name = this.uniqueId
+    this.sprite.anchor.setTo(0.5, 0.5)
+    this.sprite.width = this.width
+    this.sprite.height = this.height
+  }
+
+}

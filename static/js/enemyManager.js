@@ -13,19 +13,14 @@ class EnemyManager {
 
     this.game = game
     //  Create some baddies to waste :)
-    //
+
     this.enemies = []
 
-    this.enemiesTotal = 20
-    this.enemiesAlive = 20
+    this.enemiesTotal = 0
+    this.enemiesAlive = 0
 
-    for (var i = 0; i < this.enemiesTotal; i++)
-    {
-        this.enemies.push(new EnemyTank(i, this.game, game.player.tank, this.bullets))
-    }
-    //
     //  Explosion pool
-    this.explosions = game.add.group();
+    this.explosions = this.game.add.group();
 
     for (var i = 0; i < 10; i++)
     {
@@ -36,6 +31,15 @@ class EnemyManager {
 
     this.game.enemyManager = this
 
+  }
+
+  createMoreEnemies(numberNewEnemies) {
+    for (var i = 0; i < numberNewEnemies; i++)
+    {
+        this.enemies.push(new EnemyTank(i, this.game, game.player.tank, this.bullets))
+        this.enemiesTotal += 1
+        this.enemiesAlive += 1
+    }
   }
 
   bulletHitEnemy(tank, bullet) {

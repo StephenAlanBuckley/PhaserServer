@@ -4,24 +4,26 @@
  * There's no mutations yet
  */
 
-const BASE_DNA_LENGTH = 100
+const BASE_DNA_LENGTH = 1000
 const MIN_CROSSOVER_RATE = 15
 const MAX_CROSSOVER_RATE = 35
 
-/* UNUSED
-const MUTATIONS = {
-  this.INSERTION_PERCENTAGE = .1
-  this.DELETION_PERCENTAGE = .1
-  this.SUBSITUTION_PERCENTAGE = .2
-}
-*/
+//So 1% change would be 1.0, these are all actual perkilages
+const INSERTION_PERCENTAGE = 0.1
+const DELETION_PERCENTAGE = 0.1
+const SUBSITUTION_PERCENTAGE = 0.2
 
 
 class Chromosome {
-  constructor(fromScratch = false) {
+  constructor(fromScratch = false, givenDNA = undefined) {
     if (fromScratch) {
       this.dna = this.createNewChromosome()
     }
+    if (givenDNA) {
+      this.dna = givenDNA
+    }
+
+    this.addMutations(this.dna)
   }
 
   createNewChromosome(length = BASE_DNA_LENGTH) {
@@ -81,43 +83,41 @@ class Chromosome {
 
     return newChromosome
   }
-}
 
-/*
-let dad = new Chromosome(true)
-let mom = new Chromosome(true)
-let child = new Chromosome(false)
-child.dna = dad.mate(mom)
+  addMutations(dna) {
+    let numberOfInsertions = INSERTION_PERCENTAGE * (dna.length/100)
+    let numberOfDeletions = DELETION_PERCENTAGE * (dna.length/100)
+    let numberOfSubstitutions = SUBSITUTION_PERCENTAGE * (dna.length/100)
 
-printDadColor(dad.dna)
-printMomColor(mom.dna)
-
-let colorChildString = ''
-for (var i = 0; i< child.dna.length; i++) {
-  if (child.dna.charAt(i) == mom.dna.charAt(i)) {
-    if (child.dna.charAt(i) == dad.dna.charAt(i)) {
-      colorChildString += '\x1b[37m' + child.dna.charAt(i) + '\x1b[0m'
-    } else {
-      colorChildString += '\x1b[34m' + child.dna.charAt(i) + '\x1b[0m'
+    //Insertions
+    for (let i = 0; i < numberOfInsertions; i++) {
+      let randIndex = Math.floor(Math.random() * (dna.length))
+      let randNewNumber = Math.floor(Math.random() * 9.9) //Can't actually be 10, so we get nice and close
+      let tempDna = dna.slice(0,randIndex) + randNewNumber.toString() + dna.slice(randIndex)
+      dna = tempDna
     }
-  } else {
-    colorChildString += '\x1b[31m' + child.dna.charAt(i) + '\x1b[0m'
+
+    //Deletions
+    for (let i = 0; i < numberOfDeletions; i++) {
+      let randIndex = Math.floor(Math.random() * (dna.length))
+      let tempDna = dna.slice(0,randIndex) + dna.slice(randIndex + 1)
+      dna = tempDna
+    }
+
+    //Subsitutions
+    for (let i = 0; i < numberOfSubstitutions; i++) {
+      let randIndex = Math.floor(Math.random() * (dna.length))
+      let randNewNumber = Math.floor(Math.random() * 9.9) //Can't actually be 10, so we get nice and close
+      let tempDna = dna.slice(0,randIndex) + randNewNumber.toString() + dna.slice(randIndex + 1)
+      dna = tempDna
+    }
+
+    //Let's replace the dna in here
+    this.dna = dna
+    return dna
+  }
+
+  getSequence(startPosition, endPosition) {
+    return this.dna.slice(startPosition, endPosition)
   }
 }
-
-console.log(colorChildString)
-
-
-
-function printDadColor(character) {
-  console.log('\x1b[31m%s\x1b[0m', character)
-}
-
-function printMomColor(character) {
-  console.log('\x1b[34m%s\x1b[0m', character)
-}
-
-function printBothColor(character) {
-  console.log('\x1b[37m%s\x1b[0m', character)
-}
-*/

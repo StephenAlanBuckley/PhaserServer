@@ -45,6 +45,35 @@ app.get('/', (request, response) => {
   })
 })
 
+//Debug
+app.get('/debug', (request, response) => {
+  response.render('screen', {
+    scripts: [
+      '/js/phaser.js',
+      '/js/Actions/base.js',
+      '/js/Actions/Environment/absorb.js',
+      '/js/Actions/Environment/forage.js',
+      '/js/Actions/Self/move.js',
+      '/js/Actions/Self/rotate.js',
+      '/js/HUD.js',
+      '/js/actionManager.js',
+      '/js/cameraControls.js',
+      '/js/creature.js',
+      '/js/creatureManager.js',
+      '/js/debugging.js',
+      '/js/enemyManager.js',
+      '/js/enemyTank.js',
+      '/js/energyPacket.js',
+      '/js/game.js',
+      '/js/genetics/chromosome.js',
+      '/js/obstacleManager.js',
+      '/js/player.js',
+      '/js/sense.js',
+      '/js/soil.js',
+      '/js/soilManager.js' ]
+  })
+})
+
 
 //every server should serve this beautiful quine
 app.get('/world', (request, response) => {
